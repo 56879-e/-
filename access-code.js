@@ -311,20 +311,70 @@ function showVideoModal(url) {
         const fsElement = document.fullscreenElement;
         const inFs = !!fsElement;
         if (!inFs) {
-            // exited fullscreen: restore controls layout
+            // exited fullscreen: restore controls layout and sizes
             controlsBar.style.position = 'relative';
             controlsBar.style.bottom = '';
+            controlsBar.style.left = '';
             controlsBar.style.width = '';
+            controlsBar.style.zIndex = '';
+
+            // Restore modal constraints
+            videoModalContent.style.position = 'relative';
+            videoModalContent.style.top = '';
+            videoModalContent.style.left = '';
+            videoModalContent.style.width = '';
+            videoModalContent.style.height = '';
+            videoModalContent.style.maxWidth = '90vw';
+            videoModalContent.style.maxHeight = '90vh';
+
+            // Restore embed container and iframe sizes
+            videoEmbedContainer.style.width = '80vw';
+            videoEmbedContainer.style.height = '45vw';
+            videoEmbedContainer.style.maxWidth = '900px';
+            videoEmbedContainer.style.maxHeight = '506px';
+
+            iframeWrapper.style.width = '100%';
+            iframeWrapper.style.height = '100%';
+            iframeWrapper.style.position = 'relative';
+            iframe.style.width = '100%';
             iframe.style.height = '100%';
+
             btnEnlarge.textContent = 'تكبير';
         } else {
-            // entered fullscreen: ensure controls overlay at bottom
+            // entered fullscreen: make modal and embed fill the viewport
             controlsBar.style.position = 'absolute';
             controlsBar.style.bottom = '0';
             controlsBar.style.left = '0';
             controlsBar.style.width = '100%';
             controlsBar.style.zIndex = '3';
-            iframe.style.height = 'calc(100% - 60px)';
+
+            videoModalContent.style.position = 'fixed';
+            videoModalContent.style.top = '0';
+            videoModalContent.style.left = '0';
+            videoModalContent.style.width = '100vw';
+            videoModalContent.style.height = '100vh';
+            videoModalContent.style.maxWidth = 'none';
+            videoModalContent.style.maxHeight = 'none';
+            videoModalContent.style.margin = '0';
+            videoModalContent.style.padding = '0';
+            videoModalContent.style.background = '#000';
+
+            // make the embed area fill the modal (leaving room for controls bar)
+            videoEmbedContainer.style.width = '100%';
+            videoEmbedContainer.style.height = '100%';
+            videoEmbedContainer.style.maxWidth = 'none';
+            videoEmbedContainer.style.maxHeight = 'none';
+            videoEmbedContainer.style.display = 'flex';
+            videoEmbedContainer.style.alignItems = 'center';
+            videoEmbedContainer.style.justifyContent = 'center';
+
+            iframeWrapper.style.width = '100%';
+            // leave some space for controls bar (approx 60px)
+            iframeWrapper.style.height = 'calc(100% - 60px)';
+            iframeWrapper.style.position = 'relative';
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+
             btnEnlarge.textContent = 'تصغير';
         }
     }
