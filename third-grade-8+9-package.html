@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>باكيدج الشرح - الصف الثالث الثانوي - gelvano</title>
+    <link rel="icon" type="image/png" href="assets/6546847867645351321321354564687654545343.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="access-code.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="access-code.js" defer></script>
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light gray background */
+        }
+        .page-container {
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            padding: 2rem;
+        }
+        @media (min-width: 640px) {
+            .page-container {
+                padding: 3rem;
+            }
+        }
+        .lesson-bar {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #eef;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .lesson-bar:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(213, 71, 47, 0.15);
+            border-color: var(--primary-red);
+        }
+        .lesson-number {
+            background-color: rgba(213, 71, 47, 0.1);
+            color: var(--primary-red);
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+        .lesson-bar:hover .lesson-number {
+            background-color: var(--primary-red);
+            color: white;
+            transform: scale(1.1);
+        }
+        .lesson-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+        .lesson-bar:hover .lesson-title {
+            color: var(--primary-red);
+        }
+        .lesson-play-icon {
+            font-size: 2.2rem;
+            color: #d1d5db; /* gray-300 */
+            transition: color 0.3s ease;
+        }
+        .lesson-bar:hover .lesson-play-icon {
+            color: var(--primary-red);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Logo -->
+    <header class="header">
+        <div class="logo-container">
+            <a href="index.html">
+                <img loading="lazy" src="assets/logo.png" alt="شعار الموقع" class="logo animate__animated animate__fadeIn">
+            </a>
+        </div>
+    </header>
+
+    <div class="max-w-4xl mx-auto p-4 sm:p-6 page-container">
+        <!-- Definitional Section -->
+        <section class="text-center mb-12 animate__animated animate__fadeInDown">
+            <i class="fas fa-book-reader text-5xl text-red-600 mb-4"></i>
+            <h1 class="text-4xl font-bold text-gray-800 mb-3">باكيدج الشرح الكامل</h1>
+            <p class="text-lg text-gray-500 max-w-2xl mx-auto">تجد هنا جميع دروس الشرح المفصلة لمنهج الفيزياء للصف الثالث الثانوي، مرتبة وجاهزة للمذاكرة.</p>
+        </section>
+
+        <!-- Lessons List -->
+        <section class="lessons-list animate__animated animate__fadeInUp">
+            <!-- Lesson 1 -->
+            <a href="#" class="lesson-bar" data-content-id="T101">
+                <div class="flex items-center gap-4">
+                    <div class="lesson-number">01</div>
+                    <span class="lesson-title">الدرس الأول: التيار الكهربي وقانون أوم</span>
+                </div>
+                <i class="fas fa-play-circle lesson-play-icon"></i>
+            </a>
+
+            <!-- Lesson 2 -->
+            <a href="#" class="lesson-bar" data-content-id="T102">
+                <div class="flex items-center gap-4">
+                    <div class="lesson-number">02</div>
+                    <span class="lesson-title">الدرس الثاني: توصيل المقاومات</span>
+                </div>
+                <i class="fas fa-play-circle lesson-play-icon"></i>
+            </a>
+            
+            <!-- Lesson 3 -->
+            <a href="#" class="lesson-bar" data-content-id="T103">
+                <div class="flex items-center gap-4">
+                    <div class="lesson-number">03</div>
+                    <span class="lesson-title">الدرس الثالث: قانون أوم للدوائر المغلقة</span>
+                </div>
+                <i class="fas fa-play-circle lesson-play-icon"></i>
+            </a>
+            
+            <!-- Add more lessons as needed -->
+            <div class="text-center mt-8 text-gray-500">
+                <p>... سيتم إضافة باقي الدروس تباعاً</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>  social media  </h3>
+                <p>  تابع صفحاتنا علي السوشيال ميديا عشان يوصلك كل جديد  </p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/profile.php?id=100064048811580#"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.youtube.com/@Gelvano_ph12"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>روابط سريعة</h3>
+                <ul class="footer-links">
+                    <li><a href="tests.html"><i class="fas fa-file-alt"></i> امتحانات اونلاين</a></li>
+                    <li><a href="media.html"><i class="fas fa-play-circle"></i> ابدأ مذاكرة</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>تواصل مع تيم GELVANO</h3>
+                <p><i class="fab fa-whatsapp"></i> واتساب: 01070425779</p>  
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="copyright">
+                <p>جميع الحقوق محفوظة © 2025 - تم النشر بواسطة   team Gelvano </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

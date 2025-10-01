@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> إبدأ مذاكرة - gelvano </title>
+    <link rel="icon" type="image/png" href="assets/6546847867645351321321354564687654545343.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .grade-section {
+            padding: 2.5rem;
+            margin: 2.5rem auto;
+            max-width: 900px;
+            background-color: var(--white);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .grade-section:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .grade-title {
+            color: var(--primary-red);
+            text-align: center;
+            margin-bottom: 2.5rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .grade-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-red);
+            border-radius: 2px;
+        }
+
+        .media-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .media-button {
+            background-color: var(--primary-red);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius-lg);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            min-width: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .media-button:hover {
+            background-color: var(--light-red);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .media-button i {
+            font-size: 1.2rem;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: var(--dark-gray);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: var(--primary-red);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Logo -->
+    <header class="header">
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="assets/logo.png" alt="شعار الموقع" class="logo animate__animated animate__fadeIn">
+            </a>
+        </div>
+    </header>
+
+    <!-- First Grade Section -->
+    <section class="grade-section animate__animated animate__fadeInUp">
+        <h2 class="grade-title">الصف الأول الثانوي</h2>
+        <div class="media-buttons">
+            <a href="first-grade-files.html" class="media-button">
+                <i class="fas fa-file-alt"></i>
+                الملفات
+            </a>
+            <a href="first-grade-videos.html" class="media-button">
+                <i class="fas fa-play-circle"></i>
+                الفيديوهات
+            </a>
+        </div>
+    </section>
+
+    <!-- Second Grade Section -->
+    <section class="grade-section animate__animated animate__fadeInUp" style="animation-delay: 0.2s">
+        <h2 class="grade-title">الصف الثاني الثانوي</h2>
+        <div class="media-buttons">
+            <a href="second-grade-files.html" class="media-button">
+                <i class="fas fa-file-alt"></i>
+                الملفات
+            </a>
+            <a href="second-grade-videos.html" class="media-button">
+                <i class="fas fa-play-circle"></i>
+                الفيديوهات
+            </a>
+        </div>
+    </section>
+
+    <!-- Third Grade Section -->
+    <section class="grade-section animate__animated animate__fadeInUp" style="animation-delay: 0.4s">
+        <h2 class="grade-title">الصف الثالث الثانوي</h2>
+        <div class="media-buttons">
+            <a href="third-grade-files.html" class="media-button">
+                <i class="fas fa-file-alt"></i>
+                الملفات
+            </a>
+            <a href="third-grade-videos.html" class="media-button">
+                <i class="fas fa-play-circle"></i>
+                الفيديوهات
+            </a>
+        </div>
+    </section>
+
+   <!-- Footer -->
+   <footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>  social media  </h3>
+            <p>  تابع صفحاتنا علي السوشيال ميديا عشان يوصلك كل جديد  </p>
+            <div class="social-links">
+                <a href="https://www.facebook.com/profile.php?id=100064048811580#" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.youtube.com/@Gelvano_ph12" target="_blank"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3>روابط سريعة</h3>
+            <ul class="footer-links">
+                <li><a href="tests.html"><i class="fas fa-file-alt"></i> امتحانات اونلاين</a></li>
+                <li><a href="media.html"><i class="fas fa-play-circle"></i> ابدأ مذاكرة</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>تواصل مع تيم GELVANO</h3>
+            <p><i class="fab fa-whatsapp"></i> واتساب: 01070425779</p>  
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="copyright">
+            <p>جميع الحقوق محفوظة © 2025 - تم النشر بواسطة   team Gelvano </p>
+        </div>
+    </div>
+</footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

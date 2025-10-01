@@ -1,0 +1,1733 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة الأدمن - جلفانو</title>
+    <link rel="icon" type="image/png" href="assets/6546847867645351321321354564687654545343.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .admin-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+        .admin-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        .admin-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+        .admin-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        .admin-sections {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .passwords-section {
+            width: 100%;
+        }
+        .codes-sections {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        .admin-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border: 1px solid #e9ecef;
+        }
+        .admin-section h2 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            border-bottom: 3px solid #2c3e50;
+            padding-bottom: 0.5rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 3px solid #bdc3c7;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #2c3e50;
+            box-shadow: 0 0 0 4px rgba(44, 62, 80, 0.15), 0 4px 8px rgba(0,0,0,0.15);
+            transform: translateY(-1px);
+        }
+        .btn {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(44, 62, 80, 0.3);
+        }
+        .btn-danger {
+            background: linear-gradient(135deg, #dc3545, #ff6b7a);
+        }
+        .btn-success {
+            background: linear-gradient(135deg, #28a745, #6bcf7f);
+        }
+        .btn-secondary {
+            background: linear-gradient(135deg, #6c757d, #adb5bd);
+        }
+        .list-container {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1rem;
+            background: #f8f9fa;
+        }
+        .list-item {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 12px;
+            border: 2px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            min-height: 100px;
+        }
+        .list-item:hover {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+            border-color: #2c3e50;
+        }
+        .list-item:last-child {
+            margin-bottom: 0;
+        }
+        .item-info {
+            flex: 1;
+            margin-left: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        .item-info strong {
+            color: #2c3e50;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .item-info small {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+        }
+        .item-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+        .detail-item {
+            background: #f8f9fa;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #495057;
+            border: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .item-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            align-items: flex-end;
+            min-width: 250px;
+        }
+        .action-row {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        .btn-copy {
+            background: linear-gradient(135deg, #17a2b8, #20c997);
+            padding: 0.6rem 1rem;
+            font-size: 0.9rem;
+            border-radius: 8px;
+        }
+        .btn-copy:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(23, 162, 184, 0.3);
+        }
+        .status-badge {
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+            text-align: center;
+            min-width: 70px;
+        }
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status-used {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        /* Compact styling for video/file code records */
+        #videoCodesList .list-item, #fileCodesList .list-item {
+            padding: 0.75rem;
+            min-height: 60px;
+        }
+        #videoCodesList .item-info, #fileCodesList .item-info {
+            gap: 0.4rem;
+        }
+        #videoCodesList .item-info strong, #fileCodesList .item-info strong {
+            font-size: 0.95rem;
+        }
+        #videoCodesList .item-info small, #fileCodesList .item-info small {
+            font-size: 0.85rem;
+            margin-bottom: 0.2rem;
+        }
+        #videoCodesList .item-details, #fileCodesList .item-details {
+            gap: 0.4rem;
+            margin-top: 0.2rem;
+        }
+        #videoCodesList .detail-item, #fileCodesList .detail-item {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+        }
+        #videoCodesList .status-badge, #fileCodesList .status-badge {
+            padding: 0.15rem 0.5rem;
+            font-size: 0.7rem;
+            min-width: 54px;
+        }
+        #videoCodesList .item-actions, #fileCodesList .item-actions {
+            min-width: 180px;
+            gap: 0.5rem;
+        }
+        #videoCodesList .action-row, #fileCodesList .action-row {
+            gap: 0.5rem;
+        }
+        #videoCodesList .btn, #fileCodesList .btn {
+            padding: 0.35rem 0.7rem;
+            font-size: 0.8rem;
+        }
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .alert-danger {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .alert-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .notebooks-section {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .notebook-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 2px solid #e9ecef;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 150px;
+        }
+        .notebook-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-color: #2c3e50;
+        }
+        .notebook-card i {
+            font-size: 3rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .notebook-card span {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        /* Notebook Modal Styles */
+        .notebook-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.7);
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        .notebook-modal-content {
+            background: white;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 1200px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        .notebook-modal-header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 1.5rem 2rem;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .notebook-modal-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0;
+        }
+        .notebook-modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .notebook-modal-close:hover {
+            background: rgba(255,255,255,0.2);
+            transform: rotate(90deg);
+        }
+        .notebook-modal-body {
+            padding: 2rem;
+        }
+        .notebook-sections {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        .notebook-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 2px solid #e9ecef;
+        }
+        .notebook-section h3 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-align: center;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #2c3e50;
+        }
+        .notebook-form {
+            margin-bottom: 1.5rem;
+        }
+        .notebook-form-group {
+            margin-bottom: 1rem;
+        }
+        .notebook-form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+        .notebook-form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .notebook-form-group input:focus {
+            outline: none;
+            border-color: #2c3e50;
+            box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.1);
+        }
+        .notebook-add-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .notebook-add-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(44, 62, 80, 0.3);
+        }
+        .notebook-records {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            background: white;
+        }
+        .notebook-record {
+            padding: 1rem;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        .notebook-record:hover {
+            background: #f8f9fa;
+        }
+        .notebook-record:last-child {
+            border-bottom: none;
+        }
+        .notebook-record-info {
+            flex: 1;
+        }
+        .notebook-record-name {
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 0.25rem;
+        }
+        .notebook-record-code {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .notebook-record-delete {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+        .notebook-record-delete:hover {
+            background: #c82333;
+            transform: scale(1.05);
+        }
+        /* Admin Login Overlay */
+        .admin-login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #f8f9fa;
+            z-index: 20000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .admin-login-box {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid #e9ecef;
+        }
+        .admin-login-box h2 {
+            color: #2c3e50;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+        .admin-login-box input {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+        .admin-login-box input:focus {
+            outline: none;
+            border-color: #2c3e50;
+        }
+        .admin-login-box button {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .admin-login-box button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(44, 62, 80, 0.3);
+        }
+        .admin-login-error {
+            color: #dc3545;
+            margin-top: 1rem;
+            min-height: 1.2em;
+            font-weight: 600;
+        }
+        @media (max-width: 768px) {
+            .notebook-sections {
+                grid-template-columns: 1fr;
+            }
+            .notebook-modal {
+                padding: 1rem;
+            }
+            .notebook-modal-content {
+                width: 95%;
+            }
+        }
+        @media (max-width: 768px) {
+            .codes-sections {
+                grid-template-columns: 1fr;
+            }
+            .admin-container {
+                padding: 1rem;
+            }
+            .admin-header h1 {
+                font-size: 2rem;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Admin Login Overlay -->
+    <div id="adminLoginOverlay" class="admin-login-overlay">
+        <div class="admin-login-box animate__animated animate__fadeInDown">
+            <h2><i class="fas fa-lock"></i> دخول الأدمن</h2>
+            <form id="adminLoginForm" onsubmit="return false;">
+                <input type="password" id="adminPasswordInput" placeholder="أدخل كلمة السر" required>
+                <button type="submit">دخول</button>
+                <div id="adminLoginError" class="admin-login-error"></div>
+            </form>
+        </div>
+    </div>
+
+    <div class="admin-container" style="display: none;">
+        <!-- Admin Header -->
+        <div class="admin-header animate__animated animate__fadeInDown">
+            <h1><i class="fas fa-shield-alt"></i> لوحة الأدمن</h1>
+            <p>إدارة كلمات السر والأكواد - منصة جلفانو</p>
+        </div>
+        <!-- Notebooks -->
+        <div class="notebooks-section animate__animated animate__fadeInUp" style="align-items: flex-start;">
+            <!-- دفاتر المراجعات -->
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <div class="notebook-card" onclick="openNotebookModal('first')">
+                        <i class="fas fa-book"></i>
+                        <span>دفتر أولي</span>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <div class="notebook-card" onclick="openNotebookModal('second')">
+                        <i class="fas fa-book"></i>
+                        <span>دفتر ثاني</span>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <div class="notebook-card" onclick="openNotebookModal('third')">
+                        <i class="fas fa-book"></i>
+                        <span>دفتر ثالث</span>
+                    </div>
+                </div>
+            </div>
+            <!-- دفاتر باكيدج الحصص -->
+            <div style="display: flex; flex-direction: column; gap: 1rem; margin-right:2rem;">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <div class="notebook-card" onclick="openNotebookModal('fourth')">
+                        <i class="fas fa-book-open"></i>
+                        <span>دفتر أولي (باكيدج الحصص)</span>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <div class="notebook-card" onclick="openNotebookModal('fifth')">
+                        <i class="fas fa-book-open"></i>
+                        <span>دفتر ثانيه (باكيدج الحصص)</span>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <div class="notebook-card" onclick="openNotebookModal('sixth')">
+                        <i class="fas fa-book-open"></i>
+                        <span>دفتر تالته (باكيدج الحصص)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Alert Container -->
+        <div id="alertContainer"></div>
+        
+        <!-- Notebook Modal -->
+        <div id="notebookModal" class="notebook-modal">
+            <div class="notebook-modal-content">
+                <div class="notebook-modal-header">
+                    <h2 class="notebook-modal-title" id="notebookModalTitle">دفتر أولي</h2>
+                    <button class="notebook-modal-close" onclick="closeNotebookModal()">&times;</button>
+                </div>
+                <div class="notebook-modal-body">
+                    <div class="notebook-sections">
+                        <!-- Video Section -->
+                        <div class="notebook-section">
+                            <h3><i class="fas fa-video"></i> دفتر الفيديو</h3>
+                            <div class="notebook-form">
+                                <div class="notebook-form-group">
+                                    <label for="videoName">اسم الفيديو:</label>
+                                    <input type="text" id="videoName" placeholder="أدخل اسم الفيديو">
+                                </div>
+                                <div class="notebook-form-group">
+                                    <label for="notebookVideoCode">رمز الفيديو:</label>
+                                    <input type="text" id="notebookVideoCode" placeholder="أدخل رمز الفيديو">
+                                </div>
+                                <button class="notebook-add-btn" onclick="addVideoRecord()">
+                                    <i class="fas fa-plus"></i> إضافة
+                                </button>
+                            </div>
+                            <div class="notebook-records" id="videoRecords">
+                                <!-- Video records will be displayed here -->
+                            </div>
+                        </div>
+                        
+                        <!-- File Section -->
+                        <div class="notebook-section">
+                            <h3><i class="fas fa-file"></i> دفتر الملف</h3>
+                            <div class="notebook-form">
+                                <div class="notebook-form-group">
+                                    <label for="fileName">اسم الملف:</label>
+                                    <input type="text" id="fileName" placeholder="أدخل اسم الملف">
+                                </div>
+                                <div class="notebook-form-group">
+                                    <label for="notebookFileCode">رمز الملف:</label>
+                                    <input type="text" id="notebookFileCode" placeholder="أدخل رمز الملف">
+                                </div>
+                                <button class="notebook-add-btn" onclick="addFileRecord()">
+                                    <i class="fas fa-plus"></i> إضافة
+                                </button>
+                            </div>
+                            <div class="notebook-records" id="fileRecords">
+                                <!-- File records will be displayed here -->
+                            </div>
+                        </div>
+                    </div>
+                    <div style="text-align:center;margin-top:1rem;">
+                        <button class="btn btn-secondary" onclick="restoreNotebooksFromServer()">استعادة سجلات الدفاتر من الخادم</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Admin Sections -->
+        <div class="admin-sections animate__animated animate__fadeInUp" style="animation-delay: 0.2s">
+            <!-- Passwords Management - Full Width -->
+            <div class="admin-section passwords-section">
+                <h2><i class="fas fa-key"></i> إدارة كلمات السر</h2>
+                <div class="form-group">
+                    <label for="passwordSearch">البحث في كلمات السر:</label>
+                    <input type="text" id="passwordSearch" placeholder="ابحث بكلمة السر..." onkeyup="searchPasswords()">
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">كلمة سر جديدة:</label>
+                    <input type="text" id="newPassword" placeholder="مثال: F1234" pattern="[FST][0-9]{4}">
+                </div>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem;">
+                    <button class="btn" onclick="addPassword()">
+                        <i class="fas fa-plus"></i> إضافة كلمة سر
+                    </button>
+                    <button class="btn btn-success" onclick="generatePassword('F')" title="توليد كلمة سر أولي ثانوي">
+                        <i class="fas fa-magic"></i> أولي ثانوي
+                    </button>
+                    <button class="btn btn-success" onclick="generatePassword('S')" title="توليد كلمة سر ثانيه ثانوي">
+                        <i class="fas fa-magic"></i> ثانيه ثانوي
+                    </button>
+                    <button class="btn btn-success" onclick="generatePassword('T')" title="توليد كلمة سر تالته ثانوي">
+                        <i class="fas fa-magic"></i> تالته ثانوي
+                    </button>
+                </div>
+                <div class="list-container">
+                    <div id="passwordsList">
+                        <div style="text-align: center; color: #666; padding: 2rem;">
+                            <i class="fas fa-spinner fa-spin"></i> جاري التحميل...
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Codes Management - Two Columns -->
+            <div class="codes-sections">
+                <!-- Video Codes Management -->
+            <div class="admin-section">
+                    <h2><i class="fas fa-video"></i> إدارة أكواد الفيديوهات</h2>
+                <div class="form-group">
+                        <label for="videoCodeSearch">البحث في أكواد الفيديوهات:</label>
+                        <input type="text" id="videoCodeSearch" placeholder="ابحث بكلمة السر أو الكود..." onkeyup="searchVideoCodes()">
+                </div>
+                <div class="form-group">
+                        <label for="videoCodePassword">كلمة السر:</label>
+                        <input type="text" id="videoCodePassword" placeholder="مثال: F1234">
+                    </div>
+                    <div class="form-group">
+                        <label for="videoIdSelect">معرف الفيديو:</label>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <select id="videoIdSelect" style="flex: 1; border: 3px solid #bdc3c7; border-radius: 8px; padding: 0.8rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                <option value="">اختر معرف الفيديو</option>
+                            </select>
+                            <input type="text" id="newVideoId" placeholder="إضافة معرف جديد" style="flex: 1; border: 3px solid #bdc3c7; border-radius: 8px; padding: 0.8rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <button class="btn" onclick="addVideoId()" style="margin: 0;">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                </div>
+                    <div class="form-group">
+                        <label for="videoCode">الكود:</label>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <input type="text" id="videoCode" placeholder="مثال: AB123" style="flex: 1; border: 3px solid #bdc3c7; border-radius: 8px; padding: 0.8rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <button class="btn" onclick="generateVideoCode()" style="margin: 0;">
+                                <i class="fas fa-magic"></i> توليد
+                            </button>
+                        </div>
+                </div>
+                    <div class="form-group">
+                        <label for="videoMaxUses">الحد الأقصى للاستخدام:</label>
+                        <input type="number" id="videoMaxUses" value="2" min="1" max="10">
+                </div>
+                    <button class="btn" onclick="addVideoCode()">
+                        <i class="fas fa-plus"></i> إضافة كود فيديو
+                    </button>
+                    <div class="list-container">
+                        <div id="videoCodesList">
+                            <div style="text-align: center; color: #666; padding: 2rem;">
+                                <i class="fas fa-spinner fa-spin"></i> جاري التحميل...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- File Codes Management -->
+                <div class="admin-section">
+                    <h2><i class="fas fa-file"></i> إدارة أكواد الملفات</h2>
+                <div class="form-group">
+                        <label for="fileCodeSearch">البحث في أكواد الملفات:</label>
+                        <input type="text" id="fileCodeSearch" placeholder="ابحث بكلمة السر أو الكود..." onkeyup="searchFileCodes()">
+                </div>
+                <div class="form-group">
+                        <label for="fileCodePassword">كلمة السر:</label>
+                        <input type="text" id="fileCodePassword" placeholder="مثال: F1234">
+                </div>
+                    <div class="form-group">
+                        <label for="fileIdSelect">معرف الملف:</label>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <select id="fileIdSelect" style="flex: 1; border: 3px solid #bdc3c7; border-radius: 8px; padding: 0.8rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                <option value="">اختر معرف الملف</option>
+                            </select>
+                            <input type="text" id="newFileId" placeholder="إضافة معرف جديد" style="flex: 1; border: 3px solid #bdc3c7; border-radius: 8px; padding: 0.8rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <button class="btn" onclick="addFileId()" style="margin: 0;">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fileCode">الكود:</label>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <input type="text" id="fileCode" placeholder="مثال: 1234" style="flex: 1; border: 3px solid #bdc3c7; border-radius: 8px; padding: 0.8rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <button class="btn" onclick="generateFileCode()" style="margin: 0;">
+                                <i class="fas fa-magic"></i> توليد
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fileMaxUses">الحد الأقصى للاستخدام:</label>
+                        <input type="number" id="fileMaxUses" value="2" min="1" max="10">
+                    </div>
+                    <button class="btn" onclick="addFileCode()">
+                        <i class="fas fa-plus"></i> إضافة كود ملف
+                </button>
+                <div class="list-container">
+                        <div id="fileCodesList">
+                        <div style="text-align: center; color: #666; padding: 2rem;">
+                            <i class="fas fa-spinner fa-spin"></i> جاري التحميل...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Back to Home -->
+        <div class="text-center animate__animated animate__fadeInUp" style="animation-delay: 0.4s">
+            <a href="index.html" class="btn btn-secondary">
+                <i class="fas fa-home"></i> العودة للصفحة الرئيسية
+            </a>
+        </div>
+    </div>
+    <script>
+        // Global variables
+        let passwords = [];
+        let codes = [];
+        let videoIds = [];
+        let fileIds = [];
+        let currentNotebook = '';
+        let notebookRecords = {
+            first: {
+                videos: [],
+                files: []
+            },
+            second: { videos: [], files: [] },
+            third: { videos: [], files: [] },
+            fourth: { videos: [], files: [] },
+            fifth: { videos: [], files: [] },
+            sixth: { videos: [], files: [] }
+        };
+
+        // Function to set selected value to localStorage
+        function setSelectedValue(selectElement, key) {
+            localStorage.setItem(key, selectElement.value);
+        }
+
+        // Function to get selected value from localStorage
+        function getSelectedValue(key, defaultValue = '') {
+            return localStorage.getItem(key) || defaultValue;
+        }
+        // Initialize admin page
+        function setSelectValue(selectElementId, value) {
+            const selectElement = document.getElementById(selectElementId);
+            if (selectElement) {
+                selectElement.value = value;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Admin Login Logic
+            const correctAdminPassword = '1072004';
+            const loginOverlay = document.getElementById('adminLoginOverlay');
+            const loginForm = document.getElementById('adminLoginForm');
+            const passwordInput = document.getElementById('adminPasswordInput');
+            const loginError = document.getElementById('adminLoginError');
+            const adminContainer = document.querySelector('.admin-container');
+
+            // Check session storage first
+            if (sessionStorage.getItem('admin_logged_in') === 'true') {
+                loginOverlay.style.display = 'none';
+                adminContainer.style.display = 'block';
+            } else {
+                passwordInput.focus();
+            }
+
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (passwordInput.value === correctAdminPassword) {
+                    // Correct password
+                    sessionStorage.setItem('admin_logged_in', 'true');
+                    loginOverlay.style.display = 'none';
+                    adminContainer.style.display = 'block';
+                } else {
+                    // Incorrect password
+                    loginError.textContent = 'كلمة السر غير صحيحة';
+                    passwordInput.value = '';
+                    passwordInput.focus();
+                    // Shake animation for feedback
+                    const loginBox = document.querySelector('.admin-login-box');
+                    loginBox.classList.add('animate__shakeX');
+                    setTimeout(() => {
+                        loginBox.classList.remove('animate__shakeX');
+                    }, 1000);
+                }
+            });
+
+            loadPasswords();
+            loadCodes();
+            await loadNotebookRecords();
+
+            // Setup event listeners to save dropdown selections
+            const videoIdSelect = document.getElementById('videoIdSelect');
+            if (videoIdSelect) {
+                videoIdSelect.addEventListener('change', () => setSelectedValue(videoIdSelect, 'selectedVideoId'));
+            }
+            const fileIdSelect = document.getElementById('fileIdSelect');
+            if (fileIdSelect) {
+                fileIdSelect.addEventListener('change', () => setSelectedValue(fileIdSelect, 'selectedFileId'));
+            }
+
+            // Listen for code usage updates
+            window.addEventListener('message', function(event) {
+                if (event.data === 'codeUsed') {
+                    loadCodes();
+                }
+            });
+
+            // Listen for localStorage changes (fallback)
+            window.addEventListener('storage', function(event) {
+                if (event.key === 'gelvano_code_used') {
+                    loadCodes();
+                }
+            });
+
+            // Periodic refresh every 30 seconds
+            setInterval(loadCodes, 30000);
+        });
+        // Load passwords from server
+        async function loadPasswords() {
+            try {
+                const response = await fetch('/api/passwords');
+                if (response.ok) {
+                    passwords = await response.json();
+                    displayPasswords();
+                    updateStats();
+                } else {
+                    showAlert('خطأ في تحميل كلمات السر', 'danger');
+                }
+            } catch (error) {
+                showAlert('خطأ في الاتصال بالخادم', 'danger');
+            }
+        }
+        // Load codes from server
+        async function loadCodes() {
+            try {
+                const response = await fetch('/api/codes');
+                if (response.ok) {
+                    codes = await response.json();
+                    loadVideoIds();
+                    loadFileIds();
+                    displayVideoCodes();
+                    displayFileCodes();
+                    updateStats();
+                } else {
+                    showAlert('خطأ في تحميل الأكواد', 'danger');
+                }
+            } catch (error) {
+                showAlert('خطأ في الاتصال بالخادم', 'danger');
+            }
+        }
+        // Load video IDs from codes and localStorage
+        function loadVideoIds() {
+            // Load from existing codes
+            const codesVideoIds = [...new Set(codes.filter(code => code.videoId).map(code => code.videoId))];
+            
+            // Load from localStorage
+            const savedVideoIds = localStorage.getItem('savedVideoIds');
+            const storedVideoIds = savedVideoIds ? JSON.parse(savedVideoIds) : [];
+            
+            // Combine and remove duplicates
+            videoIds = [...new Set([...codesVideoIds, ...storedVideoIds])];
+            
+            // Save back to localStorage to keep it updated
+            localStorage.setItem('savedVideoIds', JSON.stringify(videoIds));
+            
+            updateVideoIdSelect();
+        }
+        // Load file IDs from codes and localStorage
+        function loadFileIds() {
+            // Load from existing codes
+            const codesFileIds = [...new Set(codes.filter(code => code.fileId).map(code => code.fileId))];
+            
+            // Load from localStorage
+            const savedFileIds = localStorage.getItem('savedFileIds');
+            const storedFileIds = savedFileIds ? JSON.parse(savedFileIds) : [];
+            
+            // Combine and remove duplicates
+            fileIds = [...new Set([...codesFileIds, ...storedFileIds])];
+            
+            // Save back to localStorage to keep it updated
+            localStorage.setItem('savedFileIds', JSON.stringify(fileIds));
+            
+            updateFileIdSelect();
+        }
+        // Display passwords in the list
+        function displayPasswords(filteredPasswords = null) {
+            const container = document.getElementById('passwordsList');
+            const passwordsToShow = filteredPasswords || passwords;
+            if (passwordsToShow.length === 0) {
+                container.innerHTML = '<div style="text-align: center; color: #666; padding: 2rem;">لا توجد كلمات سر</div>';
+                return;
+            }
+            container.innerHTML = passwordsToShow.map(password => `
+                <div class="list-item">
+                    <div class="item-info">
+                        <strong>${password}</strong>
+                        <small>كلمة سر مسجلة في النظام</small>
+                        <div class="item-details">
+                            <div class="detail-item">
+                                <i class="fas fa-key"></i> كلمة سر
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <div class="action-row">
+                            <button class="btn btn-copy" onclick="copyToClipboard('${password}', 'كلمة السر')" title="نسخ كلمة السر">
+                                <i class="fas fa-copy"></i> نسخ
+                            </button>
+                            <button class="btn btn-danger" onclick="deletePassword('${password}')" title="حذف كلمة السر">
+                                <i class="fas fa-trash"></i> حذف
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        // Search passwords
+        function searchPasswords() {
+            const searchTerm = document.getElementById('passwordSearch').value.toLowerCase();
+            const filteredPasswords = passwords.filter(password => 
+                password.toLowerCase().includes(searchTerm)
+            );
+            displayPasswords(filteredPasswords);
+        }
+        // Display video codes in the list
+        function displayVideoCodes(filteredCodes = null) {
+            const container = document.getElementById('videoCodesList');
+            const videoCodes = codes.filter(code => code.videoId);
+            const codesToShow = filteredCodes || videoCodes;
+            if (codesToShow.length === 0) {
+                container.innerHTML = '<div style="text-align: center; color: #666; padding: 2rem;">لا توجد أكواد فيديوهات</div>';
+                return;
+            }
+            container.innerHTML = codesToShow.map(code => `
+                <div class="list-item">
+                    <div class="item-info">
+                        <strong>${code.code}</strong>
+                        <small>كود فيديو مسجل في النظام</small>
+                        <div class="item-details">
+                            <div class="detail-item">
+                                <i class="fas fa-key"></i> ${code.password}
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-video"></i> ${code.videoId}
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-chart-bar"></i> ${code.useCount || 0}/${code.maxUses || 2}
+                            </div>
+                            <span class="status-badge ${code.used || (code.useCount || 0) >= (code.maxUses || 2) ? 'status-used' : 'status-active'}">
+                                ${code.used || (code.useCount || 0) >= (code.maxUses || 2) ? 'مستخدم' : 'نشط'}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <div class="action-row">
+                            <button class="btn btn-copy" onclick="copyToClipboard('${code.code}', 'كود الفيديو')" title="نسخ الكود">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                            <button class="btn btn-copy" onclick="copyToClipboard('${code.password}', 'كلمة السر')" title="نسخ كلمة السر">
+                                <i class="fas fa-key"></i>
+                            </button>
+                        </div>
+                        <div class="action-row">
+                            <button class="btn btn-success" onclick="toggleCodeStatus('${code.id}', ${!(code.used || (code.useCount || 0) >= (code.maxUses || 2))})" title="${code.used || (code.useCount || 0) >= (code.maxUses || 2) ? 'تفعيل الكود' : 'إيقاف الكود'}">
+                                <i class="fas fa-${code.used || (code.useCount || 0) >= (code.maxUses || 2) ? 'play' : 'pause'}"></i> 
+                                ${code.used || (code.useCount || 0) >= (code.maxUses || 2) ? 'تفعيل' : 'إيقاف'}
+                            </button>
+                            <button class="btn btn-danger" onclick="deleteCode('${code.id}')" title="حذف الكود">
+                                <i class="fas fa-trash"></i> حذف
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        // Display file codes in the list
+        function displayFileCodes(filteredCodes = null) {
+            const container = document.getElementById('fileCodesList');
+            const fileCodes = codes.filter(code => code.fileId);
+            const codesToShow = filteredCodes || fileCodes;
+            if (codesToShow.length === 0) {
+                container.innerHTML = '<div style="text-align: center; color: #666; padding: 2rem;">لا توجد أكواد ملفات</div>';
+                return;
+            }
+            container.innerHTML = codesToShow.map(code => `
+                <div class="list-item">
+                    <div class="item-info">
+                        <strong>${code.code}</strong>
+                        <small>كود ملف مسجل في النظام</small>
+                        <div class="item-details">
+                            <div class="detail-item">
+                                <i class="fas fa-key"></i> ${code.password}
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-file"></i> ${code.fileId}
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-chart-bar"></i> ${code.useCount || 0}/${code.maxUses || 2}
+                            </div>
+                            <span class="status-badge ${code.used || (code.useCount || 0) >= (code.maxUses || 2) ? 'status-used' : 'status-active'}">
+                                ${code.used || (code.useCount || 0) >= (code.maxUses || 2) ? 'مستخدم' : 'نشط'}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <div class="action-row">
+                            <button class="btn btn-copy" onclick="copyToClipboard('${code.code}', 'كود الملف')" title="نسخ الكود">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                            <button class="btn btn-copy" onclick="copyToClipboard('${code.password}', 'كلمة السر')" title="نسخ كلمة السر">
+                                <i class="fas fa-key"></i>
+                            </button>
+                        </div>
+                        <div class="action-row">
+                            <button class="btn btn-success" onclick="toggleCodeStatus('${code.id}', ${!(code.used || (code.useCount || 0) >= (code.maxUses || 2))})" title="${code.used || (code.useCount || 0) >= (code.maxUses || 2) ? 'تفعيل الكود' : 'إيقاف الكود'}">
+                                <i class="fas fa-${code.used || (code.useCount || 0) >= (code.maxUses || 2) ? 'play' : 'pause'}"></i> 
+                                ${code.used || (code.useCount || 0) >= (code.maxUses || 2) ? 'تفعيل' : 'إيقاف'}
+                            </button>
+                            <button class="btn btn-danger" onclick="deleteCode('${code.id}')" title="حذف الكود">
+                                <i class="fas fa-trash"></i> حذف
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        // Search video codes
+        function searchVideoCodes() {
+            const searchTerm = document.getElementById('videoCodeSearch').value.toLowerCase();
+            const videoCodes = codes.filter(code => code.videoId);
+            const filteredCodes = videoCodes.filter(code => 
+                code.password.toLowerCase().includes(searchTerm) || 
+                code.code.toLowerCase().includes(searchTerm)
+            );
+            displayVideoCodes(filteredCodes);
+        }
+        // Search file codes
+        function searchFileCodes() {
+            const searchTerm = document.getElementById('fileCodeSearch').value.toLowerCase();
+            const fileCodes = codes.filter(code => code.fileId);
+            const filteredCodes = fileCodes.filter(code => 
+                code.password.toLowerCase().includes(searchTerm) || 
+                code.code.toLowerCase().includes(searchTerm)
+            );
+            displayFileCodes(filteredCodes);
+        }
+        // Update video ID select dropdown
+        function updateVideoIdSelect() {
+            const select = document.getElementById('videoIdSelect');
+            const selectedValue = localStorage.getItem('selectedVideoId');
+            select.innerHTML = '<option value="">اختر معرف الفيديو</option>';
+            videoIds.sort().forEach(id => {
+                select.innerHTML += `<option value="${id}">${id}</option>`;
+            });
+            // Set the selected value if it exists
+            select.value = selectedValue || '';
+        }
+        // Update file ID select dropdown
+        function updateFileIdSelect() {
+            const select = document.getElementById('fileIdSelect');
+            const selectedValue = localStorage.getItem('selectedFileId');
+            select.innerHTML = '<option value="">اختر معرف الملف</option>';
+            fileIds.sort().forEach(id => {
+                select.innerHTML += `<option value="${id}">${id}</option>`;
+            });
+            // Set the selected value if it exists
+            select.value = selectedValue || '';
+        }
+        // Add new video ID
+        function addVideoId() {
+            const newId = document.getElementById('newVideoId').value.trim();
+            if (!newId) {
+                showAlert('يرجى إدخال معرف الفيديو', 'danger');
+                return;
+            }
+            if (!videoIds.includes(newId)) {
+                videoIds.push(newId);
+                
+                // Save to localStorage for persistence
+                localStorage.setItem('savedVideoIds', JSON.stringify(videoIds));
+                
+                updateVideoIdSelect();
+                document.getElementById('videoIdSelect').value = newId;
+                document.getElementById('newVideoId').value = '';
+                showAlert('تم إضافة معرف الفيديو بنجاح', 'success');
+            } else {
+                showAlert('معرف الفيديو موجود بالفعل', 'danger');
+            }
+        }
+        // Add new file ID
+        function addFileId() {
+            const newId = document.getElementById('newFileId').value.trim();
+            if (!newId) {
+                showAlert('يرجى إدخال معرف الملف', 'danger');
+                return;
+            }
+            if (!fileIds.includes(newId)) {
+                fileIds.push(newId);
+                
+                // Save to localStorage for persistence
+                localStorage.setItem('savedFileIds', JSON.stringify(fileIds));
+                
+                updateFileIdSelect();
+                document.getElementById('fileIdSelect').value = newId;
+                document.getElementById('newFileId').value = '';
+                showAlert('تم إضافة معرف الملف بنجاح', 'success');
+            } else {
+                showAlert('معرف الملف موجود بالفعل', 'danger');
+            }
+        }
+        // Generate video code (2 letters + 3 numbers)
+        function generateVideoCode() {
+            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            const numbers = '0123456789';
+            let code = '';
+            // Generate 2 random letters
+            for (let i = 0; i < 2; i++) {
+                code += letters.charAt(Math.floor(Math.random() * letters.length));
+            }
+            // Generate 3 random numbers
+            for (let i = 0; i < 3; i++) {
+                code += numbers.charAt(Math.floor(Math.random() * numbers.length));
+            }
+            document.getElementById('videoCode').value = code;
+        }
+        // Generate file code (4 numbers)
+        function generateFileCode() {
+            const numbers = '0123456789';
+            let code = '';
+            // Generate 4 random numbers
+            for (let i = 0; i < 4; i++) {
+                code += numbers.charAt(Math.floor(Math.random() * numbers.length));
+            }
+            document.getElementById('fileCode').value = code;
+        }
+        // Generate password with specific prefix
+        function generatePassword(prefix) {
+            const numbers = '0123456789';
+            let password = prefix;
+            // Generate 4 random numbers
+            for (let i = 0; i < 4; i++) {
+                password += numbers.charAt(Math.floor(Math.random() * numbers.length));
+            }
+            document.getElementById('newPassword').value = password;
+            showCenterToast(`تم توليد كلمة سر ${prefix === 'F' ? 'أولي ثانوي' : prefix === 'S' ? 'ثانيه ثانوي' : 'تالته ثانوي'}`);
+        }
+        
+        // Add new password
+        async function addPassword() {
+            const password = document.getElementById('newPassword').value.trim();
+            if (!password) {
+                showAlert('يرجى إدخال كلمة سر', 'danger');
+                return;
+            }
+            if (!/^[FST][0-9]{4}$/.test(password)) {
+                showAlert('كلمة السر يجب أن تبدأ بحرف (F/S/T) ثم 4 أرقام', 'danger');
+                return;
+            }
+            try {
+                const response = await fetch('/api/passwords', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ password })
+                });
+                const result = await response.json();
+                if (response.ok) {
+                    showAlert(result.message, 'success');
+                    document.getElementById('newPassword').value = '';
+                    loadPasswords();
+                } else {
+                    showAlert(result.error, 'danger');
+                }
+            } catch (error) {
+                showAlert('خطأ في الاتصال بالخادم', 'danger');
+            }
+        }
+        // Add new video code
+        async function addVideoCode() {
+            const password = document.getElementById('videoCodePassword').value.trim();
+            const videoId = document.getElementById('videoIdSelect').value;
+            const code = document.getElementById('videoCode').value.trim();
+            const maxUses = parseInt(document.getElementById('videoMaxUses').value);
+            if (!password) {
+                showAlert('يرجى إدخال كلمة سر', 'danger');
+                return;
+            }
+            if (!videoId) {
+                showAlert('يرجى اختيار معرف الفيديو', 'danger');
+                return;
+            }
+            if (!code) {
+                showAlert('يرجى إدخال الكود', 'danger');
+                return;
+            }
+            try {
+                const response = await fetch('/api/codes', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        password,
+                        videoId,
+                        fileId: '',
+                        code,
+                        maxUses
+                    })
+                });
+                const result = await response.json();
+                if (response.ok) {
+                    showAlert(result.message, 'success');
+                    // Clear form
+                    document.getElementById('videoCodePassword').value = '';
+                    document.getElementById('videoIdSelect').value = '';
+                    document.getElementById('videoCode').value = '';
+                    document.getElementById('videoMaxUses').value = '2';
+                    loadCodes();
+                } else {
+                    showAlert(result.error, 'danger');
+                }
+            } catch (error) {
+                showAlert('خطأ في الاتصال بالخادم', 'danger');
+            }
+        }
+        // Add new file code
+        async function addFileCode() {
+            const password = document.getElementById('fileCodePassword').value.trim();
+            const fileId = document.getElementById('fileIdSelect').value;
+            const code = document.getElementById('fileCode').value.trim();
+            const maxUses = parseInt(document.getElementById('fileMaxUses').value);
+            if (!password) {
+                showAlert('يرجى إدخال كلمة سر', 'danger');
+                return;
+            }
+            if (!fileId) {
+                showAlert('يرجى اختيار معرف الملف', 'danger');
+                return;
+            }
+            if (!code) {
+                showAlert('يرجى إدخال الكود', 'danger');
+                return;
+            }
+            try {
+                const response = await fetch('/api/codes', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        password,
+                        videoId: '',
+                        fileId,
+                        code,
+                        maxUses
+                    })
+                });
+                const result = await response.json();
+                if (response.ok) {
+                    showAlert(result.message, 'success');
+                    // Clear form
+                    document.getElementById('fileCodePassword').value = '';
+                    document.getElementById('fileIdSelect').value = '';
+                    document.getElementById('fileCode').value = '';
+                    document.getElementById('fileMaxUses').value = '2';
+                    loadCodes();
+                } else {
+                    showAlert(result.error, 'danger');
+                }
+            } catch (error) {
+                showAlert('خطأ في الاتصال بالخادم', 'danger');
+            }
+        }
+        // Delete password
+        async function deletePassword(password) {
+            if (!confirm('هل أنت متأكد من حذف كلمة السر؟')) {
+                return;
+            }
+            try {
+                const response = await fetch(`/api/passwords/${password}`, {
+                    method: 'DELETE'
+                });
+                const result = await response.json();
+                if (response.ok) {
+                    showAlert(result.message, 'success');
+                    loadPasswords();
+                } else {
+                    showAlert(result.error, 'danger');
+                }
+            } catch (error) {
+                showAlert('خطأ في الاتصال بالخادم', 'danger');
+            }
+        }
+        // Delete code
+        async function deleteCode(codeId) {
+            if (!confirm('هل أنت متأكد من حذف الكود؟')) {
+                return;
+            }
+            try {
+                const response = await fetch(`/api/codes/${codeId}`, {
+                    method: 'DELETE'
+                });
+                const result = await response.json();
+                if (response.ok) {
+                    showAlert(result.message, 'success');
+                    loadCodes();
+                } else {
+                    showAlert(result.error, 'danger');
+                }
+            } catch (error) {
+                showAlert('خطأ في الاتصال بالخادم', 'danger');
+            }
+        }
+        // Toggle code status
+        async function toggleCodeStatus(codeId, newStatus) {
+            try {
+                const response = await fetch(`/api/codes/${codeId}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        used: newStatus,
+                        useCount: newStatus ? 0 : undefined  // إعادة تعيين عدد مرات الاستخدام عند التفعيل
+                    })
+                });
+                const result = await response.json();
+                if (response.ok) {
+                    showAlert(result.message, 'success');
+                    loadCodes();
+                } else {
+                    showAlert(result.error, 'danger');
+                }
+            } catch (error) {
+                showAlert('خطأ في الاتصال بالخادم', 'danger');
+            }
+        }
+        // Update statistics
+        function updateStats() {
+            const videoCodes = codes.filter(c => c.videoId);
+            const fileCodes = codes.filter(c => c.fileId);
+            document.getElementById('totalPasswords').textContent = passwords.length;
+            document.getElementById('totalCodes').textContent = codes.length;
+            document.getElementById('activeCodes').textContent = codes.filter(c => !c.used && (c.useCount || 0) < (c.maxUses || 2)).length;
+            document.getElementById('usedCodes').textContent = codes.filter(c => c.used || (c.useCount || 0) >= (c.maxUses || 2)).length;
+        }
+        // Copy to clipboard function
+        // Center toast for quick confirmations (e.g., copy)
+        function showCenterToast(message, durationMs = 1200) {
+            const toast = document.createElement('div');
+            toast.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#28a745;color:#fff;padding:12px 20px;border-radius:10px;z-index:10000;box-shadow:0 8px 24px rgba(0,0,0,.2);font-weight:700;min-width:160px;text-align:center;opacity:1;';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.style.transition = 'opacity .25s ease';
+                toast.style.opacity = '0';
+                setTimeout(() => { if (toast.parentNode) toast.remove(); }, 250);
+            }, durationMs);
+        }
+        async function copyToClipboard(text, type) {
+            try {
+                await navigator.clipboard.writeText(text);
+                showCenterToast('تم النسخ');
+            } catch (err) {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showCenterToast('تم النسخ');
+            }
+        }
+        // Show alert message
+        function showAlert(message, type) {
+            const container = document.getElementById('alertContainer');
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type} animate__animated animate__fadeInDown`;
+            alert.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'danger' ? 'exclamation-circle' : 'info-circle'}"></i>
+                ${message}
+            `;
+            container.innerHTML = '';
+            container.appendChild(alert);
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (alert.parentNode) {
+                    alert.classList.add('animate__fadeOutUp');
+                    setTimeout(() => {
+                        if (alert.parentNode) {
+                            alert.remove();
+                        }
+                    }, 300);
+                }
+            }, 5000);
+        }
+        
+        // Notebook Modal Functions
+        function openNotebookModal(notebookType) {
+            currentNotebook = notebookType;
+            // تأكد من وجود الدفتر في السجلات
+            if (!notebookRecords[currentNotebook]) {
+                notebookRecords[currentNotebook] = { videos: [], files: [] };
+            }
+            const titles = {
+                'first': 'دفتر أولي',
+                'second': 'دفتر ثاني', 
+                'third': 'دفتر ثالثه',
+                'fourth': 'دفتر أولي',
+                'fifth': 'دفتر ثانيه',
+                'sixth': 'دفتر تالته'
+            };
+            document.getElementById('notebookModalTitle').textContent = titles[notebookType];
+            document.getElementById('notebookModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            displayNotebookRecords();
+        }
+        
+        function closeNotebookModal() {
+            document.getElementById('notebookModal').style.display = 'none';
+            document.body.style.overflow = '';
+            // Clear notebook form fields
+            document.getElementById('videoName').value = '';
+            document.getElementById('notebookVideoCode').value = '';
+            document.getElementById('fileName').value = '';
+            document.getElementById('notebookFileCode').value = '';
+            currentNotebook = '';
+        }
+        
+        async function loadNotebookRecords() {
+            // Try to fetch notebooks from server first
+            try {
+                const resp = await fetch('/api/notebooks');
+                if (resp.ok) {
+                    const data = await resp.json();
+                    if (data && (data.first || data.second || data.third || data.fourth || data.fifth || data.sixth)) {
+                        notebookRecords = data;
+                        // Mirror locally
+                        localStorage.setItem('notebookRecords', JSON.stringify(notebookRecords));
+                        return;
+                    }
+                }
+            } catch (err) {
+                console.warn('تعذر تحميل سجلات الدفاتر من الخادم');
+            }
+
+            // Fallback to localStorage
+            const saved = localStorage.getItem('notebookRecords');
+            if (saved) {
+                try {
+                    notebookRecords = JSON.parse(saved);
+                } catch (e) {
+                    console.warn('خطأ في قراءة سجلات الدفاتر من التخزين المحلي');
+                }
+            }
+            // إضافة الدفاتر الجديدة إذا لم تكن موجودة
+            if (!notebookRecords.fourth) notebookRecords.fourth = { videos: [], files: [] };
+            if (!notebookRecords.fifth) notebookRecords.fifth = { videos: [], files: [] };
+            if (!notebookRecords.sixth) notebookRecords.sixth = { videos: [], files: [] };
+        }
+
+        async function saveNotebookRecords() {
+            // Save locally
+            localStorage.setItem('notebookRecords', JSON.stringify(notebookRecords));
+
+            // Try to persist to server (best-effort)
+            try {
+                const resp = await fetch('/api/notebooks', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(notebookRecords)
+                });
+                if (!resp.ok) {
+                    console.warn('تعذر حفظ سجلات الدفاتر على الخادم');
+                }
+            } catch (err) {
+                console.warn('تعذر الاتصال بالخادم لحفظ سجلات الدفاتر');
+            }
+        }
+
+        async function restoreNotebooksFromServer() {
+            if (!confirm('هل تريد استعادة سجلات الدفاتر من نسخة الخادم (سيستبدل المحتوى المحلي)؟')) return;
+            try {
+                const resp = await fetch('/api/notebooks');
+                if (resp.ok) {
+                    const data = await resp.json();
+                    notebookRecords = data;
+                    localStorage.setItem('notebookRecords', JSON.stringify(notebookRecords));
+                    displayNotebookRecords();
+                    showAlert('تم استعادة سجلات الدفاتر من الخادم', 'success');
+                } else {
+                    showAlert('تعذر استعادة البيانات من الخادم', 'danger');
+                }
+            } catch (err) {
+                showAlert('خطأ في الاتصال بالخادم', 'danger');
+            }
+        }
+        
+        function displayNotebookRecords() {
+            const videoRecords = document.getElementById('videoRecords');
+            const fileRecords = document.getElementById('fileRecords');
+            if (!notebookRecords[currentNotebook]) return;
+            // Display video records
+            if (notebookRecords[currentNotebook].videos.length === 0) {
+                videoRecords.innerHTML = '<div style="text-align: center; color: #666; padding: 1rem;">لا توجد سجلات فيديو</div>';
+            } else {
+                videoRecords.innerHTML = notebookRecords[currentNotebook].videos.map((record, index) => `
+                    <div class="notebook-record">
+                        <div class="notebook-record-info">
+                            <div class="notebook-record-name">${record.name}</div>
+                            <div class="notebook-record-code">${record.code}</div>
+                        </div>
+                        <button class="notebook-record-delete" onclick="deleteVideoRecord(${index})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `).join('');
+            }
+            // Display file records
+            if (notebookRecords[currentNotebook].files.length === 0) {
+                fileRecords.innerHTML = '<div style="text-align: center; color: #666; padding: 1rem;">لا توجد سجلات ملفات</div>';
+            } else {
+                fileRecords.innerHTML = notebookRecords[currentNotebook].files.map((record, index) => `
+                    <div class="notebook-record">
+                        <div class="notebook-record-info">
+                            <div class="notebook-record-name">${record.name}</div>
+                            <div class="notebook-record-code">${record.code}</div>
+                        </div>
+                        <button class="notebook-record-delete" onclick="deleteFileRecord(${index})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `).join('');
+            }
+        }
+        
+        function addVideoRecord() {
+            const name = document.getElementById('videoName').value.trim();
+            const code = document.getElementById('notebookVideoCode').value.trim();
+            
+            if (!name || !code) {
+                showAlert('يرجى ملء جميع الحقول', 'danger');
+                return;
+            }
+            
+            notebookRecords[currentNotebook].videos.push({ name, code });
+            saveNotebookRecords();
+            displayNotebookRecords();
+            
+            // Clear form
+            document.getElementById('videoName').value = '';
+            document.getElementById('notebookVideoCode').value = '';
+            
+            showCenterToast('تم إضافة سجل الفيديو');
+        }
+        
+        function addFileRecord() {
+            const name = document.getElementById('fileName').value.trim();
+            const code = document.getElementById('notebookFileCode').value.trim();
+            
+            if (!name || !code) {
+                showAlert('يرجى ملء جميع الحقول', 'danger');
+                return;
+            }
+            
+            notebookRecords[currentNotebook].files.push({ name, code });
+            saveNotebookRecords();
+            displayNotebookRecords();
+            
+            // Clear form
+            document.getElementById('fileName').value = '';
+            document.getElementById('notebookFileCode').value = '';
+            
+            showCenterToast('تم إضافة سجل الملف');
+        }
+        
+        function deleteVideoRecord(index) {
+            if (confirm('هل أنت متأكد من حذف سجل الفيديو؟')) {
+                notebookRecords[currentNotebook].videos.splice(index, 1);
+                saveNotebookRecords();
+                displayNotebookRecords();
+                showCenterToast('تم حذف سجل الفيديو');
+            }
+        }
+        
+        function deleteFileRecord(index) {
+            if (confirm('هل أنت متأكد من حذف سجل الملف؟')) {
+                notebookRecords[currentNotebook].files.splice(index, 1);
+                saveNotebookRecords();
+                displayNotebookRecords();
+                showCenterToast('تم حذف سجل الملف');
+            }
+        }
+        
+        // Close modal when clicking outside
+        document.getElementById('notebookModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeNotebookModal();
+            }
+        });
+    </script>
+</body>
+
+</html>
+
+
+</html>
