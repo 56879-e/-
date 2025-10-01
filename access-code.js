@@ -86,22 +86,13 @@ videoModal.innerHTML = `
 document.body.appendChild(videoModal);
 const closeVideoModalBtn = videoModal.querySelector('.close-video-modal');
 const videoEmbedContainer = videoModal.querySelector('.video-embed-container');
-// Close handler will call cleanup if present
 closeVideoModalBtn.onclick = function() {
-    if (window._gelvano_cleanupVideo) {
-        try { window._gelvano_cleanupVideo(); } catch (e) { console.error(e); }
-        window._gelvano_cleanupVideo = null;
-    }
     videoModal.style.display = 'none';
     videoEmbedContainer.innerHTML = '';
     document.body.style.overflow = '';
 };
 videoModal.onclick = function(e) {
     if (e.target === videoModal) {
-        if (window._gelvano_cleanupVideo) {
-            try { window._gelvano_cleanupVideo(); } catch (err) { console.error(err); }
-            window._gelvano_cleanupVideo = null;
-        }
         videoModal.style.display = 'none';
         videoEmbedContainer.innerHTML = '';
         document.body.style.overflow = '';
@@ -152,17 +143,14 @@ function getEmbedUrl(url) {
         if (url.includes('youtu.be/')) {
             videoId = url.split('youtu.be/')[1].split(/[?&]/)[0];
         } else if (url.includes('youtube.com/watch')) {
-            const params = new URLSearchParams(url.split('?')[1] || '');
+            const params = new URLSearchParams(url.split('?')[1]);
             videoId = params.get('v');
         } else if (url.includes('/embed/')) {
             // دعم روابط YouTube المضمنة مباشرة
             videoId = url.split('/embed/')[1]?.split(/[?&]/)[0] || '';
         }
         if (videoId) {
-            // Disable YouTube native controls (controls=0) and enable JS API so we can control playback
-            // Also disable iframe fullscreen button (fs=0) and set origin for safer postMessage communication
-            const origin = encodeURIComponent(location.origin);
-            return `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&controls=0&enablejsapi=1&fs=0&origin=${origin}`;
+            return `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&controls=1&fs=1`;
         }
     }
     // Google Drive
@@ -170,7 +158,7 @@ function getEmbedUrl(url) {
         let match = url.match(/\/file\/d\/([^/]+)/);
         let id = match ? match[1] : null;
         if (!id) {
-            const params = new URLSearchParams(url.split('?')[1] || '');
+            const params = new URLSearchParams(url.split('?')[1]);
             id = params.get('id');
         }
         if (id) {
@@ -179,11 +167,10 @@ function getEmbedUrl(url) {
     }
     return null;
 }
-
 function showVideoModal(url) {
     const embedUrl = getEmbedUrl(url);
     if (!embedUrl) {
-        // fallback: open original link in new tab if possible
+        // حل بديل: فتح الرابط الأصلي في تبويب جديد إذا كان صالحاً
         if (url && url !== '#' && url !== 'about:blank') {
             window.open(url, '_blank');
         } else {
@@ -191,29 +178,15 @@ function showVideoModal(url) {
         }
         return;
     }
-
-    // clear container
     videoEmbedContainer.innerHTML = '';
-
-    // create wrapper for iframe so we can resize while keeping controls below
-    const iframeWrapper = document.createElement('div');
-    iframeWrapper.style.width = '100%';
-    iframeWrapper.style.height = '100%';
-    iframeWrapper.style.position = 'relative';
-    iframeWrapper.style.background = '#000';
-
     const iframe = document.createElement('iframe');
-    iframe.id = 'gelvano-youtube-player';
     iframe.src = embedUrl;
     iframe.allow = 'autoplay; encrypted-media';
-    iframe.setAttribute('allow', 'autoplay; encrypted-media');
-    iframe.allowFullscreen = false; // disable iframe fullscreen button; we'll use modal-level fullscreen
+    iframe.allowFullscreen = true;
     iframe.style.width = '100%';
     iframe.style.height = '100%';
     iframe.style.border = 'none';
-    iframeWrapper.appendChild(iframe);
-
-    // handle iframe load error (X-Frame-Options etc.)
+    // إذا فشل التضمين بسبب سياسات X-Frame، أظهر زر فتح في تبويب جديد
     iframe.addEventListener('error', function() {
         videoEmbedContainer.innerHTML = '';
         const openBtn = document.createElement('a');
@@ -227,120 +200,10 @@ function showVideoModal(url) {
         openBtn.style.textDecoration = 'none';
         videoEmbedContainer.appendChild(openBtn);
     });
-
-    // Build custom controls bar under the video
-    const controlsBar = document.createElement('div');
-    controlsBar.className = 'custom-video-controls';
-    controlsBar.style.cssText = 'display:flex;gap:8px;align-items:center;justify-content:center;padding:10px;background:rgba(0,0,0,0.6);position:relative;color:#fff;';
-
-    const btnPlay = document.createElement('button');
-    btnPlay.textContent = 'تشغيل';
-    btnPlay.style.cssText = 'padding:8px 12px;border-radius:6px;border:none;background:#4CAF50;color:#fff;cursor:pointer;';
-
-    const btnEnlarge = document.createElement('button');
-    btnEnlarge.textContent = 'تكبير';
-    btnEnlarge.style.cssText = 'padding:8px 12px;border-radius:6px;border:none;background:#1976D2;color:#fff;cursor:pointer;';
-
-    const btnClose = document.createElement('button');
-    btnClose.textContent = 'اغلاق';
-    btnClose.style.cssText = 'padding:8px 12px;border-radius:6px;border:none;background:#E53935;color:#fff;cursor:pointer;';
-
-    controlsBar.appendChild(btnPlay);
-    controlsBar.appendChild(btnEnlarge);
-    controlsBar.appendChild(btnClose);
-
-    // Put iframe and controls into a column container
-    const column = document.createElement('div');
-    column.style.cssText = 'display:flex;flex-direction:column;width:100%;height:100%;';
-    iframeWrapper.style.flex = '1 1 auto';
-    column.appendChild(iframeWrapper);
-    column.appendChild(controlsBar);
-
-    videoEmbedContainer.appendChild(column);
+    videoEmbedContainer.appendChild(iframe);
     videoModal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
-
-    // Message handler to receive state updates from YouTube iframe
-    function messageHandler(event) {
-        let data = event.data;
-        let parsed = null;
-        try {
-            if (typeof data === 'string' && data.startsWith('{')) parsed = JSON.parse(data);
-            else if (typeof data === 'object') parsed = data;
-        } catch (e) {
-            return;
-        }
-        if (!parsed || !parsed.event) return;
-        if (parsed.event === 'onStateChange') {
-            const info = parsed.info;
-            if (info === 1) btnPlay.textContent = 'ايقاف';
-            else btnPlay.textContent = 'تشغيل';
-        }
-    }
-
-    window.addEventListener('message', messageHandler);
-
-    // Control actions: use postMessage command API to control YouTube iframe
-    function postCommand(cmd, args) {
-        try {
-            const msg = JSON.stringify({ event: 'command', func: cmd, args: args || [] });
-            iframe.contentWindow.postMessage(msg, '*');
-        } catch (e) { console.error('postCommand error', e); }
-    }
-
-    btnPlay.addEventListener('click', function() {
-        // toggle using button label
-        if (btnPlay.textContent === 'تشغيل') {
-            postCommand('playVideo');
-            btnPlay.textContent = 'ايقاف';
-        } else {
-            postCommand('pauseVideo');
-            btnPlay.textContent = 'تشغيل';
-        }
-    });
-
-    // Modal-level fullscreen: toggle expanding modal content
-    const videoModalContent = videoModal.querySelector('.video-modal-content');
-    let isFullscreen = false;
-    btnEnlarge.addEventListener('click', function() {
-        isFullscreen = !isFullscreen;
-        if (isFullscreen) {
-            videoModalContent.style.position = 'fixed';
-            videoModalContent.style.top = '0';
-            videoModalContent.style.left = '0';
-            videoModalContent.style.width = '100vw';
-            videoModalContent.style.height = '100vh';
-            videoModalContent.style.maxWidth = 'none';
-            videoModalContent.style.maxHeight = 'none';
-            iframe.style.height = 'calc(100vh - 60px)';
-            btnEnlarge.textContent = 'تصغير';
-        } else {
-            videoModalContent.style.position = 'relative';
-            videoModalContent.style.maxWidth = '90vw';
-            videoModalContent.style.maxHeight = '90vh';
-            iframe.style.height = '100%';
-            btnEnlarge.textContent = 'تكبير';
-        }
-    });
-
-    btnClose.addEventListener('click', function() {
-        postCommand('stopVideo');
-        if (window._gelvano_cleanupVideo) {
-            try { window._gelvano_cleanupVideo(); } catch (e) { console.error(e); }
-            window._gelvano_cleanupVideo = null;
-        }
-        videoModal.style.display = 'none';
-        videoEmbedContainer.innerHTML = '';
-        document.body.style.overflow = '';
-    });
-
-    // Expose cleanup so close handlers can call it
-    window._gelvano_cleanupVideo = function() {
-        try { postCommand('stopVideo'); } catch (e) { /* ignore */ }
-        window.removeEventListener('message', messageHandler);
-    };
 }
-
 function showPdfModal(url) {
     const normalizedUrl = (url || '').replace(/\\/g, '/');
     if (!normalizedUrl || normalizedUrl === '#') {
